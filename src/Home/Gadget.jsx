@@ -1,9 +1,8 @@
 import PropTypes from "prop-types";
 
 const ProductCard = ({ product }) => {
-  console.log(product);
   return (
-    <div className="group flex h-full flex-col justify-between overflow-hidden rounded bg-white text-slate-500 shadow-xl shadow-blue-200 hover:scale-105 hover:border hover:border-blue-400 hover:shadow-none">
+    <div className="group flex h-full flex-col justify-between overflow-hidden rounded bg-white text-slate-500 shadow-xl shadow-blue-200 hover:scale-105 hover:border hover:border-blue-400 hover:shadow-none hover:duration-500">
       <>
         <figure>
           <img
@@ -29,7 +28,7 @@ const ProductCard = ({ product }) => {
 
       <div className="flex justify-end p-6 pt-0">
         <button className="inline-flex h-10 w-full items-center justify-center gap-2 whitespace-nowrap rounded bg-blue-500 px-5 text-sm font-medium tracking-wide text-white transition duration-300 hover:bg-blue-600 focus:bg-blue-700 focus-visible:outline-none disabled:cursor-not-allowed disabled:border-blue-300 disabled:bg-blue-300 disabled:shadow-none">
-          <span>Order now!</span>
+          <span>View Details</span>
         </button>
       </div>
     </div>
