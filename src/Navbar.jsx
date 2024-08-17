@@ -18,6 +18,7 @@ const Navbar = () => {
   const [sortPrice, setSortPrice] = useState([]);
   const [dateSort, setDateSort] = useState(false);
   const [totalClass, setTotalClass] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   const pages = [...Array(Math.ceil(parseInt(totalClass) / 6)).keys()];
 
@@ -91,6 +92,7 @@ const Navbar = () => {
   };
 
   useEffect(() => {
+    setLoading(true);
     fetch(
       `${import.meta.env.VITE_SERVER}/products?page=${currentPage - 1}&search=${search}&testData=${JSON.stringify(testData)}`,
     )
@@ -98,6 +100,7 @@ const Navbar = () => {
       .then((data) => {
         setGadgets(data?.result);
         setTotalClass(data?.totalClasses);
+        setLoading(false);
       });
   }, [
     search,
@@ -112,30 +115,36 @@ const Navbar = () => {
   // Getting Brands Name
 
   useEffect(() => {
+    setLoading(true);
     fetch(`${import.meta.env.VITE_SERVER}/filter`)
       .then((res) => res.json())
       .then((data) => {
         setBrands(data);
+        setLoading(false);
       });
   }, []);
 
   // Getting Categories Name
 
   useEffect(() => {
+    setLoading(true);
     fetch(`${import.meta.env.VITE_SERVER}/filter2`)
       .then((res) => res.json())
       .then((data) => {
         setCategories(data);
+        setLoading(false);
       });
   }, []);
 
   // Getting Price Data
 
   useEffect(() => {
+    setLoading(true);
     fetch(`${import.meta.env.VITE_SERVER}/filter3`)
       .then((res) => res.json())
       .then((data) => {
         setPrice(data);
+        setLoading(false);
       });
   }, []);
 
@@ -451,21 +460,27 @@ const Navbar = () => {
       {/* Products Section */}
       <div className="container mx-auto">
         {/* Card */}
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {gadgets.length > 0 ? (
-            gadgets.map((gadget) => (
-              <Gadget key={gadget._id} product={gadget}></Gadget>
-            ))
-          ) : (
-            <div className="col-span-1 md:col-span-2 lg:col-span-4">
-              <h3 className="flex h-[50vh] items-center justify-center text-center text-3xl font-semibold">
-                Nothing Found!
-              </h3>
-            </div>
-          )}
-        </div>
+        {loading ? (
+          <div className="flex justify-center">
+            <span className="loading loading-dots loading-lg"></span>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {gadgets.length > 0 ? (
+              gadgets.map((gadget) => (
+                <Gadget key={gadget._id} product={gadget}></Gadget>
+              ))
+            ) : (
+              <div className="col-span-1 md:col-span-2 lg:col-span-4">
+                <h3 className="flex h-[50vh] items-center justify-center text-center text-3xl font-semibold">
+                  Nothing Found!
+                </h3>
+              </div>
+            )}
+          </div>
+        )}
         {/* pagination */}
-        <div className="mt-8 flex  justify-center">
+        <div className="mt-8 flex justify-center">
           <ul className="flex space-x-1 md:space-x-2">
             <li>
               <button

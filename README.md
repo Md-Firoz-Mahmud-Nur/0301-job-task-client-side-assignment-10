@@ -1,4 +1,4 @@
-# Fit N Flex Arena
+# Gadget Galaxy
 
 [Live Link : Gadget Galaxy](https://s0301-job-task-scic-ass-10.web.app/)
 
