@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "./AuthProvider";
 import { MdFilterAlt } from "react-icons/md";
@@ -7,6 +7,10 @@ const Navbar = () => {
   const { user, signOutUser, setUser } = useContext(AuthContext);
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
+  const [brands, setBrands] = useState([]);
+
+  const [brand, setBrand] = useState([]);
+
 
   const signOut = () => {
     signOutUser()
@@ -73,6 +77,14 @@ const Navbar = () => {
     setSearch(search);
     setCurrentPage(1);
   };
+
+  useEffect(() => {
+    fetch(`${import.meta.env.VITE_SERVER}/filter`)
+      .then((res) => res.json())
+      .then((data) => {
+        setBrands(data);
+      });
+  }, []);
 
   return (
     <div className="z-100 container sticky top-0 mx-auto mb-10">
@@ -189,14 +201,36 @@ const Navbar = () => {
               </span>
             </label>
           </div>
-          <div className="drawer-side ">
+          <div className="drawer-side">
             <label
               htmlFor="my-drawer-4"
               aria-label="close sidebar"
               className="drawer-overlay"
             ></label>
-            <ul className="menu min-h-full w-60 md:w-80 bg-base-200 p-4 text-base-content">
-{/* brand */}
+            <ul className="menu min-h-full w-60 bg-base-200 p-4 text-base-content md:w-80">
+              <div className="mb-5">
+                <p className="mb-3 border-b text-lg font-medium">Brand</p>
+                <div>
+                  {brands &&
+                    brands.map((brand) => (
+                      <div
+                        key={brand._id}
+                        className="mb-1 flex items-center gap-2"
+                      >
+                        <input
+                          type="checkbox"
+                          className="checkbox"
+                          onChange={(e) =>
+                            e.target.checked
+                              ? setBrand([...brand, brand?._id])
+                              : setBrand(brand.filter((r) => r !== brand?._id))
+                          }
+                        />{" "}
+                        <span>{brand._id}</span>
+                      </div>
+                    ))}
+                </div>
+              </div>
             </ul>
           </div>
         </div>

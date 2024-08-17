@@ -7,10 +7,6 @@ const Home = () => {
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
 
-  console.log(gadgets);
-
-
-
   useEffect(() => {
     fetch(
       `${import.meta.env.VITE_SERVER}/products?page=${currentPage - 1}&search=${search}`,
