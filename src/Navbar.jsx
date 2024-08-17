@@ -19,16 +19,6 @@ const Navbar = () => {
   const [dateSort, setDateSort] = useState(false);
   const [totalClass, setTotalClass] = useState(0);
 
-  console.log(priceSelected);
-
-  const signOut = () => {
-    signOutUser()
-      .then(() => {
-        setUser(null);
-      })
-      .catch(() => {});
-  };
-
   const pages = [...Array(Math.ceil(parseInt(totalClass) / 6)).keys()];
 
   const testData = {
@@ -109,7 +99,17 @@ const Navbar = () => {
         setGadgets(data?.result);
         setTotalClass(data?.totalClasses);
       });
-  }, [search, brand, category, priceSelected, sortPrice, dateSort,currentPage]);
+  }, [
+    search,
+    brand,
+    category,
+    priceSelected,
+    sortPrice,
+    dateSort,
+    currentPage,
+  ]);
+
+  // Getting Brands Name
 
   useEffect(() => {
     fetch(`${import.meta.env.VITE_SERVER}/filter`)
@@ -118,6 +118,9 @@ const Navbar = () => {
         setBrands(data);
       });
   }, []);
+
+  // Getting Categories Name
+
   useEffect(() => {
     fetch(`${import.meta.env.VITE_SERVER}/filter2`)
       .then((res) => res.json())
@@ -125,6 +128,9 @@ const Navbar = () => {
         setCategories(data);
       });
   }, []);
+
+  // Getting Price Data
+
   useEffect(() => {
     fetch(`${import.meta.env.VITE_SERVER}/filter3`)
       .then((res) => res.json())
@@ -133,9 +139,19 @@ const Navbar = () => {
       });
   }, []);
 
+  const signOut = () => {
+    signOutUser()
+      .then(() => {
+        setUser(null);
+      })
+      .catch(() => {});
+  };
+
   return (
     <div className="mb-40">
       <div className="z-100 container sticky top-0 mx-auto mb-10">
+        {/* Navbar Section */}
+
         <div className="navbar top-0 mx-auto border-b border-blue-500 bg-blue-50 shadow-xl shadow-blue-100">
           <div className="navbar-start">
             <div className="dropdown">
@@ -189,6 +205,7 @@ const Navbar = () => {
             </ul>
           </div>
           <div className="navbar-end gap-4">
+            {/* User Photo */}
             {user ? (
               <>
                 <div
@@ -224,6 +241,8 @@ const Navbar = () => {
           </div>
         </div>
         <div className="container mx-auto mt-6 flex items-center justify-center gap-1 bg-blue-100 shadow-xl shadow-blue-100 md:gap-2">
+          {/* Search  */}
+
           <form
             onSubmit={handleSearch}
             className="my-3 flex items-center justify-center"
@@ -243,10 +262,10 @@ const Navbar = () => {
               </button>
             </label>
           </form>
+          {/* Filter Button */}
           <div className="z-100 drawer min-w-16 max-w-min lg:drawer-end">
             <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
             <div className="drawer-content">
-              {/* Page content here */}
               <label
                 htmlFor="my-drawer-4"
                 className="btn drawer-button whitespace-nowrap rounded bg-blue-500 px-1 text-sm font-medium tracking-wide text-white transition duration-300 hover:bg-blue-600 focus:bg-blue-700 md:px-5"
@@ -263,6 +282,7 @@ const Navbar = () => {
                 className="drawer-overlay"
               ></label>
               <ul className="menu min-h-full w-60 bg-base-200 p-4 text-base-content md:w-80">
+                {/* Brands Name */}
                 <div className="mb-5">
                   <p className="mb-3 border-b text-lg font-medium">Brand</p>
                   <div>
@@ -288,6 +308,7 @@ const Navbar = () => {
                       ))}
                   </div>
                 </div>
+                {/* Category Name */}
                 <div className="mb-5">
                   <p className="mb-3 border-b text-lg font-medium">Category</p>
                   <div>
@@ -318,6 +339,7 @@ const Navbar = () => {
                       ))}
                   </div>
                 </div>
+                {/* Price Range */}
                 <div className="mb-5">
                   <p className="mb-3 border-b text-lg font-medium">
                     Price Range
@@ -356,6 +378,7 @@ const Navbar = () => {
                     </div>
                   </div>
                 </div>
+                {/* Price Sort */}
                 <div className="mb-5">
                   <p className="mb-3 border-b text-lg font-medium">
                     Price Sorting
@@ -400,7 +423,7 @@ const Navbar = () => {
                     </div>
                   </div>
                 </div>
-                {/* Date */}
+                {/* Date Sort */}
                 <div className="mb-5">
                   <p className="mb-3 border-b text-lg font-medium">
                     Date Sorting
@@ -425,7 +448,9 @@ const Navbar = () => {
           </div>
         </div>
       </div>
+      {/* Products Section */}
       <div className="container mx-auto">
+        {/* Card */}
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
           {gadgets.length > 0 ? (
             gadgets.map((gadget) => (
@@ -484,6 +509,7 @@ const Navbar = () => {
             </li>
           </ul>
         </div>
+        {/* End Of Pagination */}
       </div>
     </div>
   );

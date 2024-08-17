@@ -74,7 +74,7 @@ const Login = () => {
   return (
     <>
       <Helmet>
-        <title>Login | Fit N Flex Arena</title>
+        <title>Login | Gadget Galaxy</title>
       </Helmet>
       <div className="hero p-5 md:p-20">
         <div className="hero-content flex-col">
