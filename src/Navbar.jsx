@@ -4,6 +4,7 @@ import { AuthContext } from "./AuthProvider";
 import { MdFilterAlt } from "react-icons/md";
 import Home from "./Home/Home";
 import Gadget from "./Home/Gadget";
+import { split } from "postcss/lib/list";
 
 const Navbar = () => {
   const { user, signOutUser, setUser } = useContext(AuthContext);
@@ -12,9 +13,12 @@ const Navbar = () => {
   const [brands, setBrands] = useState([]);
   const [brand, setBrand] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [price, setPrice] = useState([]);
+  const [priceSelected, setPriceSelected] = useState([]);
   const [category, setCategory] = useState([]);
   const [gadgets, setGadgets] = useState([]);
 
+  console.log(priceSelected);
 
   const signOut = () => {
     signOutUser()
@@ -28,6 +32,7 @@ const Navbar = () => {
     search,
     brand,
     category,
+    priceSelected,
   };
 
   const links = (
@@ -97,7 +102,7 @@ const Navbar = () => {
       .then((data) => {
         setGadgets(data?.result);
       });
-  }, [search, brand, category]);
+  }, [search, brand, category, priceSelected]);
 
   useEffect(() => {
     fetch(`${import.meta.env.VITE_SERVER}/filter`)
@@ -111,6 +116,13 @@ const Navbar = () => {
       .then((res) => res.json())
       .then((data) => {
         setCategories(data);
+      });
+  }, []);
+  useEffect(() => {
+    fetch(`${import.meta.env.VITE_SERVER}/filter3`)
+      .then((res) => res.json())
+      .then((data) => {
+        setPrice(data);
       });
   }, []);
 
@@ -299,17 +311,48 @@ const Navbar = () => {
                       ))}
                   </div>
                 </div>
+                <div className="mb-5">
+                  <p className="mb-3 border-b text-lg font-medium">
+                    Price Range
+                  </p>
+                  <div>
+                    {price.map((singlePrice) => (
+                      <div
+                        key={singlePrice._id}
+                        className="mb-1 flex items-center gap-2"
+                      >
+                        <input
+                          type="radio"
+                          name="radio-1"
+                          className="radio"
+                          onChange={(e) =>
+                            e.target.checked
+                              ? setPriceSelected(singlePrice._id.split("-"))
+                              : setPriceSelected("")
+                          }
+                        />{" "}
+                        <span>{singlePrice._id}</span>
+                      </div>
+                    ))}
+                    <div className="mb-1 flex items-center gap-2">
+                      <input
+                        type="radio"
+                        name="radio-1"
+                        className="radio"
+                        onChange={(e) =>
+                          e.target.checked
+                            ? setPriceSelected([])
+                            : setPriceSelected([])
+                        }
+                      />{" "}
+                      <span>None</span>
+                    </div>
+                  </div>
+                </div>
               </ul>
             </div>
           </div>
         </div>
-        <Home
-          search={search}
-          category={category}
-          brand={brand}
-          currentPage={currentPage}
-          testData={testData}
-        ></Home>
       </div>
       <div className="container mx-auto">
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
