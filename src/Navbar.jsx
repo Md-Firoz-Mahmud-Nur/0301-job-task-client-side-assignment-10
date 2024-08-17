@@ -2,7 +2,6 @@ import { useContext, useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "./AuthProvider";
 import { MdFilterAlt } from "react-icons/md";
-import Home from "./Home/Home";
 import Gadget from "./Home/Gadget";
 
 const Navbar = () => {
@@ -15,7 +14,6 @@ const Navbar = () => {
   const [price, setPrice] = useState([]);
   const [priceSelected, setPriceSelected] = useState([]);
   const [category, setCategory] = useState([]);
-
   const [gadgets, setGadgets] = useState([]);
   const [sortPrice, setSortPrice] = useState([]);
   const [dateSort, setDateSort] = useState(false);
@@ -111,7 +109,7 @@ const Navbar = () => {
         setGadgets(data?.result);
         setTotalClass(data?.totalClasses);
       });
-  }, [search, brand, category, priceSelected, sortPrice, dateSort, pages]);
+  }, [search, brand, category, priceSelected, sortPrice, dateSort,currentPage]);
 
   useEffect(() => {
     fetch(`${import.meta.env.VITE_SERVER}/filter`)
@@ -463,7 +461,7 @@ const Navbar = () => {
                   onClick={() => setCurrentPage(page + 1)}
                   className={`${
                     currentPage === page + 1
-                      ? "bg-amber-500 text-white"
+                      ? "bg-blue-500 text-white"
                       : "bg-gray-200 text-gray-700 hover:bg-opacity-80"
                   } px-4 py-2 focus:outline-none`}
                 >
