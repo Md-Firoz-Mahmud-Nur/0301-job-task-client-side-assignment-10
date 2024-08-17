@@ -10,6 +10,8 @@ const Navbar = () => {
   const [brands, setBrands] = useState([]);
 
   const [brand, setBrand] = useState([]);
+  const [categories, setCategories] = useState([]);
+
 
 
   const signOut = () => {
@@ -83,6 +85,13 @@ const Navbar = () => {
       .then((res) => res.json())
       .then((data) => {
         setBrands(data);
+      });
+  }, []);
+  useEffect(() => {
+    fetch(`${import.meta.env.VITE_SERVER}/filter2`)
+      .then((res) => res.json())
+      .then((data) => {
+        setCategories(data);
       });
   }, []);
 
@@ -227,6 +236,29 @@ const Navbar = () => {
                           }
                         />{" "}
                         <span>{brand._id}</span>
+                      </div>
+                    ))}
+                </div>
+              </div>
+              <div className="mb-5">
+                <p className="mb-3 border-b text-lg font-medium">Category</p>
+                <div>
+                  {categories &&
+                    categories.map((category) => (
+                      <div
+                        key={category._id}
+                        className="mb-1 flex items-center gap-2"
+                      >
+                        <input
+                          type="checkbox"
+                          className="checkbox"
+                          onChange={(e) =>
+                            e.target.checked
+                              ? setBrand([...category, category?._id])
+                              : setBrand(category.filter((r) => r !== category?._id))
+                          }
+                        />{" "}
+                        <span>{category._id}</span>
                       </div>
                     ))}
                 </div>
