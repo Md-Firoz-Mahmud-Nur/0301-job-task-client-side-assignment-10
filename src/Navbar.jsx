@@ -18,6 +18,8 @@ const Navbar = () => {
 
   const [gadgets, setGadgets] = useState([]);
   const [sortPrice, setSortPrice] = useState([]);
+  const [dateSort, setDateSort] = useState(false);
+
   console.log(priceSelected);
 
   const signOut = () => {
@@ -34,6 +36,7 @@ const Navbar = () => {
     category,
     priceSelected,
     sortPrice,
+    dateSort,
   };
 
   const links = (
@@ -103,7 +106,7 @@ const Navbar = () => {
       .then((data) => {
         setGadgets(data?.result);
       });
-  }, [search, brand, category, priceSelected, sortPrice]);
+  }, [search, brand, category, priceSelected, sortPrice, dateSort]);
 
   useEffect(() => {
     fetch(`${import.meta.env.VITE_SERVER}/filter`)
@@ -128,7 +131,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <div>
+    <div className="mb-40">
       <div className="z-100 container sticky top-0 mx-auto mb-10">
         <div className="navbar top-0 mx-auto border-b border-blue-500 bg-blue-50 shadow-xl shadow-blue-100">
           <div className="navbar-start">
@@ -394,6 +397,26 @@ const Navbar = () => {
                     </div>
                   </div>
                 </div>
+                {/* Date */}
+                <div className="mb-5">
+                  <p className="mb-3 border-b text-lg font-medium">
+                    Date Sorting
+                  </p>
+                  <div>
+                    <div className="mb-1 flex items-center gap-2">
+                      <input
+                        type="checkbox"
+                        className="checkbox"
+                        onChange={(e) =>
+                          e.target.checked
+                            ? setDateSort(true)
+                            : setDateSort(false)
+                        }
+                      />{" "}
+                      <span>{"Newest first"}</span>
+                    </div>
+                  </div>
+                </div>
               </ul>
             </div>
           </div>
@@ -413,6 +436,7 @@ const Navbar = () => {
             </div>
           )}
         </div>
+        {/* pagination */}
       </div>
     </div>
   );
