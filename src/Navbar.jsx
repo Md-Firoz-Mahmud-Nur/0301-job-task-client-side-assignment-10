@@ -465,8 +465,8 @@ const Navbar = () => {
           )}
         </div>
         {/* pagination */}
-        <div className="mt-8 flex justify-center">
-          <ul className="flex space-x-2">
+        <div className="mt-8 flex  justify-center">
+          <ul className="flex space-x-1 md:space-x-2">
             <li>
               <button
                 onClick={() => setCurrentPage(currentPage - 1)}
@@ -474,7 +474,7 @@ const Navbar = () => {
                   currentPage === 1
                     ? "cursor-not-allowed bg-gray-300 text-gray-700"
                     : "bg-gray-300 text-gray-700 hover:bg-opacity-80"
-                } rounded-l-lg px-4 py-2 focus:outline-none`}
+                } rounded-l-lg px-2 py-1 focus:outline-none md:px-4 md:py-2`}
                 disabled={currentPage === 1}
               >
                 Prev
@@ -488,7 +488,7 @@ const Navbar = () => {
                     currentPage === page + 1
                       ? "bg-blue-500 text-white"
                       : "bg-gray-200 text-gray-700 hover:bg-opacity-80"
-                  } px-4 py-2 focus:outline-none`}
+                  } px-2 py-1 focus:outline-none md:px-4 md:py-2`}
                 >
                   {page + 1}
                 </button>
@@ -501,7 +501,7 @@ const Navbar = () => {
                   currentPage === pages.length
                     ? "cursor-not-allowed bg-gray-300 text-gray-700"
                     : "bg-gray-300 text-gray-700 hover:bg-opacity-80"
-                } rounded-r-lg px-4 py-2 focus:outline-none`}
+                } rounded-r-lg px-2 py-1 focus:outline-none md:px-4 md:py-2`}
                 disabled={currentPage === pages.length}
               >
                 Next
