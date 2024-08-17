@@ -4,7 +4,6 @@ import { AuthContext } from "./AuthProvider";
 import { MdFilterAlt } from "react-icons/md";
 import Home from "./Home/Home";
 import Gadget from "./Home/Gadget";
-import { split } from "postcss/lib/list";
 
 const Navbar = () => {
   const { user, signOutUser, setUser } = useContext(AuthContext);
@@ -16,8 +15,9 @@ const Navbar = () => {
   const [price, setPrice] = useState([]);
   const [priceSelected, setPriceSelected] = useState([]);
   const [category, setCategory] = useState([]);
-  const [gadgets, setGadgets] = useState([]);
 
+  const [gadgets, setGadgets] = useState([]);
+  const [sortPrice, setSortPrice] = useState([]);
   console.log(priceSelected);
 
   const signOut = () => {
@@ -33,6 +33,7 @@ const Navbar = () => {
     brand,
     category,
     priceSelected,
+    sortPrice,
   };
 
   const links = (
@@ -102,7 +103,7 @@ const Navbar = () => {
       .then((data) => {
         setGadgets(data?.result);
       });
-  }, [search, brand, category, priceSelected]);
+  }, [search, brand, category, priceSelected, sortPrice]);
 
   useEffect(() => {
     fetch(`${import.meta.env.VITE_SERVER}/filter`)
@@ -346,6 +347,50 @@ const Navbar = () => {
                         }
                       />{" "}
                       <span>None</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="mb-5">
+                  <p className="mb-3 border-b text-lg font-medium">
+                    Price Sorting
+                  </p>
+                  <div>
+                    <div className="mb-1 flex items-center gap-2">
+                      <input
+                        type="radio"
+                        className="radio"
+                        name="radio-1"
+                        onChange={(e) =>
+                          e.target.checked
+                            ? setSortPrice("low")
+                            : setSortPrice("")
+                        }
+                      />{" "}
+                      <span>{"Low to High"}</span>
+                    </div>
+                    <div className="mb-1 flex items-center gap-2">
+                      <input
+                        type="radio"
+                        className="radio"
+                        name="radio-1"
+                        onChange={(e) =>
+                          e.target.checked
+                            ? setSortPrice("high")
+                            : setSortPrice("")
+                        }
+                      />{" "}
+                      <span>{"High to Low"}</span>
+                    </div>
+                    <div className="mb-1 flex items-center gap-2">
+                      <input
+                        type="radio"
+                        className="radio"
+                        name="radio-1"
+                        onChange={(e) =>
+                          e.target.checked ? setSortPrice("") : setSortPrice("")
+                        }
+                      />{" "}
+                      <span>{"None"}</span>
                     </div>
                   </div>
                 </div>
