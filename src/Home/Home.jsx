@@ -1,25 +1,26 @@
 import React, { useEffect, useState } from "react";
 import Gadget from "./Gadget";
 
+const Home = ({ search, category, brand }) => {
+  console.log(search);
+  console.log(category);
+  console.log(brand);
 
-const Home = () => {
   const [gadgets, setGadgets] = useState([]);
-  const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     fetch(
-      `${import.meta.env.VITE_SERVER}/products?page=${currentPage - 1}&search=${search}`,
+      `${import.meta.env.VITE_SERVER}/products?page=${currentPage - 1}&search=${search}&brand=${brand}`,
     )
       .then((res) => res.json())
       .then((data) => {
         setGadgets(data?.result);
       });
-  }, [search]);
+  }, [search, brand]);
 
   return (
-    <div className="container mx-auto ">
-
+    <div className="container mx-auto">
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
         {gadgets.length > 0 ? (
           gadgets.map((gadget) => (

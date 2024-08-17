@@ -2,17 +2,16 @@ import { useContext, useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "./AuthProvider";
 import { MdFilterAlt } from "react-icons/md";
+import Home from "./Home/Home";
 
 const Navbar = () => {
   const { user, signOutUser, setUser } = useContext(AuthContext);
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [brands, setBrands] = useState([]);
-
   const [brand, setBrand] = useState([]);
   const [categories, setCategories] = useState([]);
-
-
+  const [category, setCategory] = useState([]);
 
   const signOut = () => {
     signOutUser()
@@ -221,9 +220,9 @@ const Navbar = () => {
                 <p className="mb-3 border-b text-lg font-medium">Brand</p>
                 <div>
                   {brands &&
-                    brands.map((brand) => (
+                    brands.map((singleBrand) => (
                       <div
-                        key={brand._id}
+                        key={singleBrand._id}
                         className="mb-1 flex items-center gap-2"
                       >
                         <input
@@ -231,11 +230,13 @@ const Navbar = () => {
                           className="checkbox"
                           onChange={(e) =>
                             e.target.checked
-                              ? setBrand([...brand, brand?._id])
-                              : setBrand(brand.filter((r) => r !== brand?._id))
+                              ? setBrand([...brand, singleBrand?._id])
+                              : setBrand(
+                                  brand.filter((r) => r !== singleBrand?._id),
+                                )
                           }
-                        />{" "}
-                        <span>{brand._id}</span>
+                        />
+                        <span>{singleBrand._id}</span>
                       </div>
                     ))}
                 </div>
@@ -244,9 +245,9 @@ const Navbar = () => {
                 <p className="mb-3 border-b text-lg font-medium">Category</p>
                 <div>
                   {categories &&
-                    categories.map((category) => (
+                    categories.map((singleCategory) => (
                       <div
-                        key={category._id}
+                        key={singleCategory._id}
                         className="mb-1 flex items-center gap-2"
                       >
                         <input
@@ -254,11 +255,15 @@ const Navbar = () => {
                           className="checkbox"
                           onChange={(e) =>
                             e.target.checked
-                              ? setBrand([...category, category?._id])
-                              : setBrand(category.filter((r) => r !== category?._id))
+                              ? setCategory([...category, singleCategory?._id])
+                              : setCategory(
+                                  category.filter(
+                                    (r) => r !== singleCategory?._id,
+                                  ),
+                                )
                           }
-                        />{" "}
-                        <span>{category._id}</span>
+                        />
+                        <span>{singleCategory._id}</span>
                       </div>
                     ))}
                 </div>
@@ -267,6 +272,7 @@ const Navbar = () => {
           </div>
         </div>
       </div>
+      <Home search={search} category={category} brand={brand} currentPage={currentPage}></Home>
     </div>
   );
 };
