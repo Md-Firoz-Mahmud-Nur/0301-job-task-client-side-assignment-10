@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 
 const ProductCard = ({ product }) => {
   return (
-    <div className="group flex h-full flex-col justify-between overflow-hidden rounded bg-white text-slate-500 shadow-xl shadow-blue-200 hover:scale-105 hover:border hover:border-blue-400 hover:shadow-none hover:duration-500">
+    <div className="group flex h-full flex-col justify-between overflow-hidden rounded bg-white text-slate-500 shadow-xl shadow-blue-200 hover:bg-blue-50 hover:border hover:border-blue-400 hover:shadow-none hover:duration-500">
       <>
         <figure>
           <img
