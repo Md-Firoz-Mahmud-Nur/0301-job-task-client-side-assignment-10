@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
-import Gadget from "../Card/Gadget";
 import LoadingSpinner from "../Components/LoadingSpinner";
 import CardContainer from "../Components/CardContainer";
 import Pagination from "../Components/Pagination";
@@ -109,6 +108,7 @@ const Home = () => {
           <Search handleSearch={handleSearch}></Search>
           {/* Filter Button */}
           <Filter
+          setSearch={setSearch}
             brands={brands}
             setBrand={setBrand}
             brand={brand}
