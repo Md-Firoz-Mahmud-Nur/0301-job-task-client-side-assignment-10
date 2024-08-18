@@ -102,7 +102,7 @@ const Home = () => {
       <Helmet>
         <title>Home | Gadget Galaxy</title>
       </Helmet>
-      <div className="z-100 container sticky top-16 mx-auto mb-8">
+      <div className="z-10 container sticky top-16 mx-auto mb-8">
         <div className="container mx-auto flex items-center justify-center gap-1 md:gap-2">
           {/* Search  */}
           <Search handleSearch={handleSearch}></Search>

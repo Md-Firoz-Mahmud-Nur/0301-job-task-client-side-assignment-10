@@ -15,7 +15,7 @@ const Filter = ({
   setDateSort,
 }) => {
   return (
-    <div className="z-100 drawer min-w-16 max-w-min lg:drawer-end">
+    <div className="z-10 drawer min-w-16 max-w-min lg:drawer-end">
       <input id="my-drawer" type="checkbox" className="drawer-toggle" />
       {/* button */}
       <div className="drawer-content">
