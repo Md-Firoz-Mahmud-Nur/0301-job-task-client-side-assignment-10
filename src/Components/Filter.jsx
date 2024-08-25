@@ -15,7 +15,7 @@ const Filter = ({
   setDateSort,
 }) => {
   return (
-    <div className="z-10 drawer min-w-16 max-w-min lg:drawer-end">
+    <div className="drawer z-10 min-w-16 max-w-min lg:drawer-end">
       <input id="my-drawer" type="checkbox" className="drawer-toggle" />
       {/* button */}
       <div className="drawer-content">
@@ -35,10 +35,12 @@ const Filter = ({
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
-        <ul className="menu min-h-full w-60 bg-base-200 p-4 text-base-content md:w-80">
+        <ul className="menu min-h-full w-60 bg-base-200 p-4 text-base-content md:w-80 pt-20">
           {/* Clear Filter */}
           <div className="mb-5">
-            <p className="mb-3 border-b text-lg font-medium">Clear Filter And Search</p>
+            <p className="mb-3 border-b text-lg font-medium">
+              Clear Filter And Search
+            </p>
             <div>
               <div className="mb-1 flex items-center gap-2">
                 <input
@@ -56,8 +58,8 @@ const Filter = ({
                       for (let i = 0; i < radios.length; i++) {
                         radios[i].checked = false;
                       }
-                      setSearch("")
-                      document.getElementsByName("search")[0].value=""
+                      setSearch("");
+                      document.getElementsByName("search")[0].value = "";
                       setBrand([]);
                       setCategory([]);
                       setPriceSelected([]);
