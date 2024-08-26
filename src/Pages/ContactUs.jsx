@@ -1,5 +1,3 @@
-import React from 'react';
-
 const ContactUs = () => {
   return (
     <div className="bg-blue-50 p-6 lg:p-12 container mx-auto">

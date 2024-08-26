@@ -1,4 +1,4 @@
-import React from "react";
+import PropTypes from 'prop-types';
 import Gadget from "../Card/Gadget";
 
 const CardContainer = ({ gadgets }) => {
@@ -17,6 +17,10 @@ const CardContainer = ({ gadgets }) => {
       )}
     </div>
   );
+};
+
+CardContainer.propTypes = {
+  gadgets: PropTypes.array.isRequired,
 };
 
 export default CardContainer;

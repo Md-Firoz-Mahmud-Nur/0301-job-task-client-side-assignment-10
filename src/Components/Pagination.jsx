@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 const Pagination = ({ currentPage, pages, setCurrentPage }) => {
   return (
     <div className="mt-8 flex justify-center">
@@ -49,6 +51,12 @@ const Pagination = ({ currentPage, pages, setCurrentPage }) => {
       </ul>
     </div>
   );
+};
+
+Pagination.propTypes = {
+  currentPage: PropTypes.number.isRequired,
+  pages: PropTypes.arrayOf(PropTypes.number).isRequired,
+  setCurrentPage: PropTypes.func.isRequired,
 };
 
 export default Pagination;

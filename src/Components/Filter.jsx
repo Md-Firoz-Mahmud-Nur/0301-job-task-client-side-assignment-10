@@ -1,4 +1,4 @@
-import React from "react";
+import PropTypes from 'prop-types';
 import { MdFilterAlt } from "react-icons/md";
 
 const Filter = ({
@@ -221,6 +221,20 @@ const Filter = ({
       </div>
     </div>
   );
+};
+
+Filter.propTypes = {
+  setSearch: PropTypes.func.isRequired,
+  brands: PropTypes.array.isRequired,
+  setBrand: PropTypes.func.isRequired,
+  brand: PropTypes.string.isRequired,
+  categories: PropTypes.array.isRequired,
+  setCategory: PropTypes.func.isRequired,
+  category: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
+  setPriceSelected: PropTypes.func.isRequired,
+  setSortPrice: PropTypes.func.isRequired,
+  setDateSort: PropTypes.func.isRequired, 
 };
 
 export default Filter;

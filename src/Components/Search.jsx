@@ -1,4 +1,4 @@
-import React from 'react';
+import PropTypes from 'prop-types';
 
 const Search = ({handleSearch}) => {
   return (
@@ -22,6 +22,10 @@ const Search = ({handleSearch}) => {
     </label>
   </form>
   );
+};
+
+Search.propTypes = {
+  handleSearch: PropTypes.func.isRequired,
 };
 
 export default Search;
