@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import { MdFilterAlt } from "react-icons/md";
 
 const Filter = ({
@@ -35,7 +35,7 @@ const Filter = ({
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
-        <ul className="menu min-h-full w-60 bg-base-200 p-4 text-base-content md:w-80 pt-20">
+        <ul className="menu min-h-full w-60 bg-base-200 p-4 pt-20 text-base-content md:w-80">
           {/* Clear Filter */}
           <div className="mb-5">
             <p className="mb-3 border-b text-lg font-medium">
@@ -227,14 +227,14 @@ Filter.propTypes = {
   setSearch: PropTypes.func.isRequired,
   brands: PropTypes.array.isRequired,
   setBrand: PropTypes.func.isRequired,
-  brand: PropTypes.string.isRequired,
+  brand: PropTypes.array.isRequired,
   categories: PropTypes.array.isRequired,
   setCategory: PropTypes.func.isRequired,
-  category: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired,
+  category: PropTypes.array.isRequired,
+  price: PropTypes.array.isRequired,
   setPriceSelected: PropTypes.func.isRequired,
   setSortPrice: PropTypes.func.isRequired,
-  setDateSort: PropTypes.func.isRequired, 
+  setDateSort: PropTypes.func.isRequired,
 };
 
 export default Filter;
