@@ -11,8 +11,8 @@ const ContactUs = () => {
           assistance, feel free to contact us. We’re here to help!
         </p>
         <div className="mt-8">
-          <div className="justify-evenly md:flex md:my-6">
-            <div>
+          <div className="justify-evenly md:my-6 md:grid md:grid-cols-7">
+            <div className="col-span-3">
               <h2 className="mb-4 text-2xl font-semibold text-blue-500">
                 Our Information
               </h2>
@@ -29,8 +29,10 @@ const ContactUs = () => {
                 Providing electronic sales services since 2023
               </p>
             </div>
-            <div className="border-blue-600 md:border"></div>
-            <div>
+            <div className="col-span-1 flex justify-center">
+              <div className="border-blue-600 md:border"></div>
+            </div>
+            <div className="col-span-3">
               <h2 className="mb-4 mt-6 text-2xl font-semibold text-blue-500 md:mt-0">
                 Business Hours
               </h2>
@@ -45,7 +47,7 @@ const ContactUs = () => {
               </p>
             </div>
           </div>
-          <h2 className="mb-4 mt-6 text-2xl font-semibold text-blue-500">
+          <h2 className="mb-4 mt-6 flex justify-center text-2xl font-semibold text-blue-500">
             Get in Touch
           </h2>
           <p className="mb-4 text-lg text-gray-600">
